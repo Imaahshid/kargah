@@ -1,63 +1,43 @@
 import random
 
-choices = ["rock", "paper", "scissors"]
-print("Welcome to Rock Paper Scissors!")
-print("1. Play with Computer")
-print("2. Play with Another Player")
-mode = input("Choose game mode (1 or 2): ")
-rounds = int(input("How many rounds do you want to play? "))
+words = ["apple", "python", "computer", "book", "school"]
 
-player1_score = 0
-player2_score = 0
+word = random.choice(words)
 
-for round_number in range(1, rounds + 1):
-    print("Round", round_number)
+guessed = ""
+chances = 6
 
-    player1 = input("Player 1, choose rock, paper, or scissors: ").lower()
+print("Welcome to Hangman!")
 
-    if player1 not in choices:
-        print("Invalid choice! Try again.")
-        continue
+while chances > 0:
 
-    if mode == "1":
-        player2 = random.choice(choices)
-        print("Computer chose:", player2)
-
-    elif mode == "2":
-        player2 = input("Player 2, choose rock, paper, or scissors: ").lower()
-
-        if player2 not in choices:
-            print("Invalid choice! Try again.")
-            continue
-
+ for letter in word:
+    if letter in guessed:
+        print(letter, end=" ")
     else:
-        print("Invalid game mode!")
-        break
+        print("_", end=" ")
 
-    if player1 == player2:
-        print("It's a tie!")
+print()
 
-    elif (player1 == "rock" and player2 == "scissors") or \
-         (player1 == "paper" and player2 == "rock") or \
-         (player1 == "scissors" and player2 == "paper"):
+if all(letter in guessed for letter in word):
+    print("You won!")
+    break
 
-        print("Player 1 wins this round!")
-        player1_score += 1
+guess = input("Guess a letter: ").lower()
 
-    else:
-        print("Player 2 wins this round!")
-        player2_score += 1
+if guess in guessed:
+    print("You already guessed this letter!")
+    continue
 
-print("\n========== FINAL SCORE ==========")
-print("Player 1:", player1_score)
-print("Player 2:", player2_score)
-if player1_score > player2_score:
-    print("Player 1 is the winner!")
-elif player2_score > player1_score:
-    if mode == "1":
-        print("Computer is the winner!")
-    else:
-        print("Player 2 is the winner!")
-else:
-    print("The game is a tie!")
-print("Thanks for playing")
+guessed += guess
+
+if guess in word:
+    print("Correct!")
+elif
+    chances -= 1
+    print("Wrong!")
+    print("Chances left:", chances)
+
+elif
+    print("You lost!")
+    print("The word was:", word)
